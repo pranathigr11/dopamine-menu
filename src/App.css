@@ -1,0 +1,566 @@
+/* Basic Setup & Dark Theme */
+:root {
+  --bg-color: #121212;
+  --surface-color: #1e1e1e;
+  --primary-color: #bb86fc;
+  --primary-variant: #3700b3;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --border-color: #2c2c2c;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* App Container & Header */
+.app-container {
+  /* REMOVE or comment out the max-width property */
+  /* max-width: 800px; */ 
+  margin: 0 auto; /* Change margin to remove top/bottom spacing */
+  /* Adjust padding to give space on the sides and top */
+  padding: 2rem 4vw; /* 2rem top/bottom, 4% of viewport width left/right */
+}
+
+header {
+  /* Apply Flexbox to arrange items side-by-side */
+  display: flex;
+  justify-content: space-between; /* Pushes items to opposite ends */
+  align-items: center; /* Vertically aligns them */
+  flex-wrap: wrap; /* Allows items to stack on small screens */
+  gap: 20px; /* Adds space between items if they wrap */
+  text-align: left; /* Change from center to left for the title */
+  margin-bottom: 40px;
+}
+
+header h1 {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Activity List */
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 20px;
+}
+
+/* Individual Activity Item (The Card) */
+.activity-item {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.activity-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.activity-content h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+}
+
+.activity-content .activity-why {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Action Buttons */
+.activity-actions .btn-complete {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.activity-actions .btn-complete:hover {
+  background-color: #a764fa;
+}
+/* --- New Styles for Our Features --- */
+
+/* Category Filters */
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  margin-bottom: 0; /* No longer needs a bottom margin in the header */
+  flex-shrink: 0; /* Prevents the filters from getting squished on smaller screens */
+}
+
+.category-filters button {
+  background-color: var(--surface-color);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-filters button:hover {
+  background-color: var(--primary-variant);
+  color: var(--text-primary);
+  border-color: var(--primary-color);
+}
+
+.category-filters button.active {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  font-weight: bold;
+  border-color: var(--primary-color);
+}
+
+/* Upgraded Activity Item */
+.activity-item {
+  /* Use grid for better alignment with icons */
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.activity-item.completed {
+  opacity: 0.5;
+}
+
+.activity-item.completed .activity-content h4 {
+  text-decoration: line-through;
+}
+
+/* Icon Styles */
+.activity-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-color);
+}
+
+/* Delete Button */
+.activity-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.btn-delete:hover {
+  color: #ff5252; /* A nice red for delete actions */
+}
+
+/* Suggest Button (we will add this next) */
+.suggest-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btn-suggest {
+  background: linear-gradient(45deg, #bb86fc, #6200ee);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-suggest:hover {
+  transform: scale(1.05);
+}
+/* --- NEW UNIFORM GRID STYLES --- */
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  /* This is the key change: a 3-column grid with a gap */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* The renamed card class */
+.activity-card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* This ensures all items have the same height by default */
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.activity-card.completed {
+  opacity: 0.5;
+}
+
+.activity-card img {
+  width: 100%;
+  /* Use aspect-ratio for consistent image height relative to width */
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.activity-card h4 {
+  padding: 15px 20px;
+  margin: 0;
+  font-size: 1rem;
+  /* Allow the text area to grow if needed, maintaining card height */
+  flex-grow: 1; 
+}
+
+
+/* --- Making it Responsive (Very Important!) --- */
+
+/* For tablet-sized screens, switch to 2 columns */
+@media (max-width: 900px) {
+  .activity-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* For mobile-sized screens, switch to 1 column */
+@media (max-width: 600px) {
+  .activity-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Note: The styles for the MODAL remain completely unchanged. */
+/* --- NEW MODAL STYLES --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--surface-color);
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-text-content {
+  padding: 30px;
+}
+
+.modal-text-content h2 {
+  margin: 0 0 15px 0;
+  color: var(--primary-color);
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.btn-complete-modal, .btn-delete-modal {
+  flex-grow: 1;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-complete-modal {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+
+.btn-delete-modal {
+  background-color: #444;
+  color: var(--text-secondary);
+}
+/* --- Authentication Form Styles --- */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: var(--surface-color);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.auth-form .header {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.auth-form .description {
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.button-primary {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button-primary:hover {
+  background-color: #a764fa;
+}
+
+.button-toggle {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+/* --- New Header Styles --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
+  gap: 20px;
+}
+
+.header-content {
+  text-align: left;
+}
+
+.header-content h1, .header-content p {
+  text-align: left; /* Override any centered text styles */
+  margin: 0;
+}
+.header-content h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+}
+.header-content p {
+  color: var(--text-secondary);
+}
+
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-actions span {
+  color: var(--text-secondary);
+}
+
+/* Primary and Secondary Button Styles */
+.btn-primary, .btn-secondary {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--bg-color);
+}
+.btn-primary:hover {
+  background-color: #a764fa;
+}
+
+.btn-secondary {
+  background-color: var(--surface-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+  border-color: var(--primary-color);
+}
+
+/* Use modal overlay for auth form */
+/* We already have .modal-overlay, so we just need to make sure
+   the Auth component fits inside it */
+.modal-overlay .auth-container {
+    min-height: auto; /* Override the 100vh height */
+}
+/* --- Add Activity Form Styles --- */
+.add-activity-form {
+  background-color: var(--surface-color);
+  padding: 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.add-activity-form h2 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.add-activity-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+/* --- Completion Log Styles --- */
+.log-section {
+  margin-top: 40px;
+}
+
+.completion-log-container h2 {
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.completion-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.completion-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: var(--surface-color);
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.completion-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.completion-details h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+}
+
+.completion-details p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
