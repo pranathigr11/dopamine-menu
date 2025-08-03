@@ -17,35 +17,40 @@ function Dashboard() {
 
   useEffect(() => {
     if (session) {
-     async function getCompletions() {
+
+
+
+
+
+      // Replace the getCompletions function with this one.
+
+async function getCompletions() {
   setLoading(true);
-  console.log("Dashboard: Attempting to fetch completions for session:", session); // LOG 1
-
-  if (!session) {
-      console.log("Dashboard: No session found, aborting fetch."); // LOG 2
-      setLoading(false);
-      return;
+  if (session) {
+    // This query now fetches details from BOTH activities tables.
+    const { data, error } = await supabase
+      .from('completions')
+      .select(`
+        *,
+        activities ( text, image_url ),
+        custom_activities ( text, image_url )
+      `)
+      .eq('user_id', session.user.id)
+      .order('created_at', { ascending: false });
+    
+    if (!error) {
+      setCompletions(data || []);
+    } else {
+      console.error("Error fetching completions:", error);
+    }
   }
-  
-  const { data, error } = await supabase
-    .from('completions')
-    .select(`
-      *,
-      activities ( text, image_url )
-    `)
-    .eq('user_id', session.user.id)
-    .order('created_at', { ascending: false });
-  
-  // THIS IS THE MOST IMPORTANT PART
-  if (error) {
-    console.error("DATABASE ERROR:", error); // LOG 3
-  } else {
-    console.log("FETCHED DATA:", data); // LOG 4
-    setCompletions(data);
-  }
-
   setLoading(false);
 }
+
+
+
+
+
       getCompletions();
     }
   }, [session]);

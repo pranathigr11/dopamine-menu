@@ -416,21 +416,63 @@ function App() {
     setActivities([{ ...newActivity, isCustom: true, completed: false }, ...activities]);
   };
 
+  // const handleToggleComplete = async (activity) => {
+  //   if (activity.completed || !session) return;
+  //   const { error } = await supabase.from('completions').insert({
+  //     user_id: session.user.id,
+  //     activity_id: activity.id,
+  //   });
+  //   if (error) {
+  //     alert(error.message);
+  //     return;
+  //   }
+  //   setActivities(activities.map((act) => act.id === activity.id ? { ...act, completed: true } : act));
+  //   setShowConfetti(true);
+  //   setTimeout(() => setShowConfetti(false), 5000);
+  //   handleCloseModal();
+  // };
+
+
   const handleToggleComplete = async (activity) => {
-    if (activity.completed || !session) return;
-    const { error } = await supabase.from('completions').insert({
-      user_id: session.user.id,
-      activity_id: activity.id,
-    });
-    if (error) {
-      alert(error.message);
-      return;
-    }
-    setActivities(activities.map((act) => act.id === activity.id ? { ...act, completed: true } : act));
-    setShowConfetti(true);
-    setTimeout(() => setShowConfetti(false), 5000);
-    handleCloseModal();
+  if (activity.completed || !session) return;
+
+  // 1. Prepare the data for the new completion record.
+  let completionData = {
+    user_id: session.user.id,
+    activity_id: null, // Default to null
+    custom_activity_id: null, // Default to null
   };
+
+  // 2. Check if the activity is custom and set the correct ID.
+  if (activity.isCustom) {
+    completionData.custom_activity_id = activity.id;
+  } else {
+    completionData.activity_id = activity.id;
+  }
+
+  // 3. Insert the new record into the database.
+  const { error } = await supabase.from('completions').insert(completionData);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  // The rest of the function remains the same for UI updates.
+  setActivities(
+    activities.map((act) =>
+      act.id === activity.id && act.isCustom === activity.isCustom 
+        ? { ...act, completed: true } 
+        : act
+    )
+  );
+  setShowConfetti(true);
+  setTimeout(() => setShowConfetti(false), 5000);
+  handleCloseModal();
+};
+
+
+
   
   const handleDeleteActivity = async (activityId) => {
     await supabase.from('custom_activities').delete().eq('id', activityId);
